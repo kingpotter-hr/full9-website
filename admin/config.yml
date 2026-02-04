@@ -3,6 +3,8 @@ backend:
   repo: kingpotter-hr/full9-website
   branch: main
   base_url: https://api.netlify.com
+  auth_endpoint: oauth
+  app_id: Ov23ct5WPPSFODv8xmiq
 
 # ใช้ Git Gateway ถ้าต้องการ (แนะนำสำหรับ Hostinger)
 # backend:
