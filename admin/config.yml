@@ -1,0 +1,129 @@
+backend:
+  name: github
+  repo: kingpotter-hr/full9-website
+  branch: main
+  base_url: https://api.netlify.com
+
+# ใช้ Git Gateway ถ้าต้องการ (แนะนำสำหรับ Hostinger)
+# backend:
+#   name: git-gateway
+#   branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+site_url: '' # URL ของเว็บไซต์จริง (เช่น https://full9company.com)
+display_url: ''
+
+locale: 'th'
+
+# คอลเลคชันสำหรับจัดการเนื้อหา
+collections:
+  # หน้าแรก - Hero Section
+  - name: "hero"
+    label: "หน้าแรก (Hero)"
+    folder: "content/hero"
+    create: false
+    slug: "hero"
+    fields:
+      - { label: "ชื่อบริษัท (ภาษาอังกฤษ)", name: "company_name_en", widget: "string", default: "FULL 9 COMPANY LIMITED" }
+      - { label: "คำขวัญ", name: "tagline", widget: "string", default: "ผู้เชี่ยวชาญด้านอุปกรณ์เสริมโทรศัพท์และ Gadget" }
+      - { label: "คำอธิบาย", name: "description", widget: "text", default: "รับผลิตแบบ OEM คุณภาพสูง ตอบโจทย์ทุกความต้องการของคุณ" }
+      - { label: "ปีประสบการณ์", name: "years_experience", widget: "number", default: 10 }
+      - { label: "จำนวนลูกค้า", name: "customers_count", widget: "string", default: "500+" }
+      - { label: "จำนวนสินค้า", name: "products_count", widget: "string", default: "1000+" }
+      - { label: "รูปพื้นหลัง Hero", name: "hero_image", widget: "image", required: false }
+
+  # เกี่ยวกับเรา
+  - name: "about"
+    label: "เกี่ยวกับเรา"
+    folder: "content/about"
+    create: false
+    slug: "about"
+    fields:
+      - { label: "หัวข้อ", name: "title", widget: "string", default: "FULL 9 COMPANY LIMITED" }
+      - { label: "คำอธิบายย่อ", name: "subtitle", widget: "string", default: "ผู้นำด้านอุปกรณ์เสริมโทรศัพท์และ Gadget" }
+      - { label: "เนื้อหาตอนที่ 1", name: "content_1", widget: "markdown", default: "บริษัท ฟูล 9 จำกัด เป็นผู้เชี่ยวชาญในการผลิตและจัดจำหน่ายอุปกรณ์เสริมโทรศัพท์มือถือ และ Gadget คุณภาพสูง เรามีประสบการณ์มากกว่า 10 ปี ในการให้บริการลูกค้าทั้งในประเทศและต่างประเทศ" }
+      - { label: "เนื้อหาตอนที่ 2", name: "content_2", widget: "markdown", default: "เรารับผลิตสินค้าแบบ OEM (Original Equipment Manufacturer) ตามความต้องการของลูกค้า ด้วยมาตรฐานการผลิตที่เข้มงวด และการควบคุมคุณภาพทุกขั้นตอน" }
+      - label: "จุดเด่น"
+        name: "features"
+        widget: "list"
+        fields:
+          - { label: "ไอคอน (Font Awesome)", name: "icon", widget: "string", default: "fa-check-circle" }
+          - { label: "ข้อความ", name: "text", widget: "string" }
+        default:
+          - { icon: "fa-check-circle", text: "มาตรฐานสากล ISO 9001" }
+          - { icon: "fa-check-circle", text: "ทีมงานมืออาชีพ" }
+          - { icon: "fa-check-circle", text: "บริการครบวงจร" }
+          - { icon: "fa-check-circle", text: "จัดส่งทั่วโลก" }
+      - { label: "รูปประกอบ", name: "image", widget: "image", required: false }
+
+  # สินค้า
+  - name: "products"
+    label: "สินค้า"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "ชื่อสินค้า", name: "title", widget: "string" }
+      - { label: "หมวดหมู่", name: "category", widget: "select", options: ["case", "charger", "accessories", "tablet-case", "powerbank", "audio"] }
+      - { label: "คำอธิบาย", name: "description", widget: "text" }
+      - { label: "รูปสินค้า", name: "image", widget: "image" }
+      - label: "รายละเอียด"
+        name: "specs"
+        widget: "list"
+        fields:
+          - { label: "รายการ", name: "item", widget: "string" }
+      - { label: "แท็ก OEM", name: "is_oem", widget: "boolean", default: true }
+      - { label: "เรียงลำดับ", name: "order", widget: "number", default: 0 }
+
+  # บริการ
+  - name: "services"
+    label: "บริการ"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "ชื่อบริการ", name: "title", widget: "string" }
+      - { label: "ไอคอน (Font Awesome)", name: "icon", widget: "string", default: "fa-cog" }
+      - { label: "คำอธิบาย", name: "description", widget: "text" }
+      - { label: "เรียงลำดับ", name: "order", widget: "number", default: 0 }
+
+  # ข้อมูลติดต่อ
+  - name: "contact"
+    label: "ข้อมูลติดต่อ"
+    folder: "content/contact"
+    create: false
+    slug: "contact"
+    fields:
+      - { label: "ชื่อบริษัท (ไทย)", name: "company_name_th", widget: "string", default: "บริษัท ฟูล 9 จำกัด" }
+      - { label: "ชื่อบริษัท (อังกฤษ)", name: "company_name_en", widget: "string", default: "FULL 9 COMPANY LIMITED" }
+      - { label: "ที่อยู่", name: "address", widget: "text", default: "กรุงเทพมหานคร, ประเทศไทย" }
+      - { label: "เบอร์โทรศัพท์", name: "phone", widget: "string", default: "+66 XX XXX XXXX" }
+      - { label: "อีเมล", name: "email", widget: "string", default: "contact@full9.co.th" }
+      - { label: "เวลาทำการ", name: "working_hours", widget: "string", default: "จันทร์ - เสาร์: 09:00 - 18:00 น." }
+      - { label: "ลิงก์ Facebook", name: "facebook", widget: "string", required: false }
+      - { label: "ลิงก์ Line", name: "line", widget: "string", required: false }
+      - { label: "ลิงก์ Instagram", name: "instagram", widget: "string", required: false }
+      - { label: "ลิงก์ WeChat", name: "wechat", widget: "string", required: false }
+      - { label: "Google Maps Embed URL", name: "map_url", widget: "text", required: false }
+
+  # การตั้งค่าเว็บไซต์
+  - name: "settings"
+    label: "การตั้งค่าเว็บไซต์"
+    folder: "content/settings"
+    create: false
+    slug: "site"
+    fields:
+      - { label: "ชื่อเว็บไซต์", name: "site_title", widget: "string", default: "Full 9 Company Limited | บริษัท ฟูล 9 จำกัด" }
+      - { label: "คำอธิบายเว็บไซต์", name: "site_description", widget: "text", default: "ผู้เชี่ยวชาญด้านอุปกรณ์เสริมโทรศัพท์และ Gadget รับผลิตแบบ OEM" }
+      - label: "สีหลัก"
+        name: "colors"
+        widget: "object"
+        fields:
+          - { label: "สีหลัก (เขียว)", name: "primary", widget: "color", default: "#1B4D3E" }
+          - { label: "สีรอง (ทอง)", name: "secondary", widget: "color", default: "#D4AF37" }
+          - { label: "สีพื้นหลัง", name: "background", widget: "color", default: "#FFFFFF" }
+          - { label: "สีข้อความ", name: "text", widget: "color", default: "#1A1A1A" }
+      - { label: "Favicon", name: "favicon", widget: "image", required: false }
+      - { label: "Logo", name: "logo", widget: "image", required: false }
